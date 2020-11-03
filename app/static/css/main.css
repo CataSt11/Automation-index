@@ -1,0 +1,221 @@
+/*------------------------------- Font */
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:100,200,300,400,500,600,700,800,900');
+
+body {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+/*------------------------------- Header */
+ .header{
+   min-height: 7em;
+   margin: auto;
+   border-bottom: 1px solid rgba(8, 7, 80, 0.582);
+   text-align: center;
+ }
+ 
+/*------------------------------- Logo */
+.logo-img {
+  width: 8%;
+  padding-top: 1.5em;
+  padding-left: 2em;
+  position: absolute;
+  left: 0; 
+}
+
+/*------------------------------- Title */
+.name {
+  font-size: 1.8em;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+  margin: 0;
+  color: #000;
+  padding-top: 1em;
+  position: relative;
+  text-align: center;
+}
+
+.home-link:hover {
+  text-decoration: none;
+}
+
+/*------------------------------- Menu */
+
+.menu {
+  margin-top: 2em;
+}
+
+.active-menu-item {
+  color: rgba(60, 57, 201, 0.582);
+  font-weight: 700;
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  padding: 2em;
+}
+
+.inactive-menu-item {
+  color: #000;
+  font-weight: 400;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  padding: 2em;
+}
+
+.inactive-menu-item:hover,
+.active-menu-item:hover {
+  text-decoration: none;
+}
+
+/*-------------------------------decorations in /workflows */
+
+.workflows-data-table {
+  margin: auto;
+  padding: 2em 3em;
+  color: #000;
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.workflows-workflow-title:hover {
+  background-color: #AED1D5;
+}
+
+.workflows-main-container {
+  margin: 1.9em 3.5em;
+  width: 80%;
+}
+
+.workflows-new-workflow {
+  margin: 3em 0em;
+  margin-left: 3.7em;
+  margin-right: 1.5em;
+  padding-left: 2.5em;
+}
+
+.workflows-workflow-title {
+  padding-left: 1.2em;
+  padding-top: 1.2em;
+}
+
+.workflows-workflow-container {
+  border: 1px solid #AED1D5;
+  border-radius: 5%;
+  margin-bottom: 1em;
+}
+
+.workflow-departments-tab,
+.workflow-tasks-tab {
+  padding: 0em 1.2em;
+}
+
+.workflows-tasks-container,
+.workflows-departments-container  {
+  border: 1px solid #AED1D5;
+  border-radius: 5%;
+  margin-top: 2em;
+  padding-left: 2em;
+  padding-top: 1em;
+}
+
+.workflows-departments-container {
+  display: none;
+}
+
+.workflows-workflow-group-task-elements {
+  margin-bottom: 0.7em;
+}
+
+
+.btn-outline-dark{
+  margin: 0.5em;
+}
+
+/*-------------------------------Tables and Items unfold */
+
+.departments-data-table {
+  margin: auto;
+  padding: 2em;
+}
+
+.departments-table-name {
+  margin: auto;
+  padding-left: 4.5em;
+  padding-top: 2em;
+  color: #000;
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.table {
+  margin: auto;
+  margin-bottom: 3em;
+  padding-left: 3em;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #AED1D5;
+}
+
+.add-new-department {
+  padding-top: 1.5em;
+}
+
+.new-department {
+  margin-right: 2em;
+}
+
+.btn {
+  max-height: 1.8em;
+}
+
+
+/*------------------------------- Footer */
+.contact {
+  color: aliceblue;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-weight: 200;
+  padding-left: 2em;
+  padding-top: 1.2em;
+}
+
+.contact-link {
+  color: aliceblue;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-weight: 200;
+  padding-left: 2em;
+  padding-top: 1.2em;
+}
+.contact-link:hover {
+  text-decoration: none;
+  color: rgb(18, 133, 233);
+}
+
+/*------------------------------- Ribbons */
+.black-ribbon {
+  margin: auto;
+  padding: 0;
+  min-height: 3em;
+  width: 100%;
+  background-color: #000;
+}
+
+.blue-ribbon {
+  margin: auto;
+  padding: 0;
+  min-height: 3em;
+  width: 100%;
+  background-color: #AED1D5;
+}
+
+.leaf-picture {
+  height: 8rem;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
