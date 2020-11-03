@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 DEBUG = True
 DB_NAME = "automationdb"
-cnx = mysql.connector.connect(host='127.0.0.1', user='root',)
+cnx = mysql.connector.connect(host='0.0.0.0', user='root',)
 cursor = cnx.cursor(dictionary=True)
 try:
     cursor.execute(f"DROP DATABASE {DB_NAME};")
@@ -21,7 +21,7 @@ if DEBUG:
     print(f"Successfully created database {DB_NAME}.")
 cursor.close()
 cnx.close()
-cnx = mysql.connector.connect(host='127.0.0.1', database=DB_NAME, user='root', )
+cnx = mysql.connector.connect(host='0.0.0.0', database=DB_NAME, user='root', )
 cnx.autocommit = True
 cursor = cnx.cursor(dictionary=True)
 
