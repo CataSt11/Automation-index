@@ -1,0 +1,12 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+The following reports are available:<br>
+<h3>How much time was saved in an workflow under a time period</h3>
+Year, Month, Time saved<br>
+{% for row in data["time_saved"] %}
+{{ row.year }}-{{ row.month }} {{ row.time_saved }}<br>
+{% endfor %}
+
+{% endblock %}

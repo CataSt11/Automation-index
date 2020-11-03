@@ -1,0 +1,48 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+
+<h2 class="departments-table-name">The following departments are available:</h2>
+<br><br>
+
+<div class="departments-data-table container-fluid">
+    <div class="table container-fluid">
+        <form name="form-departments" action="/forms" method="post">
+            <div>
+                <table>
+                    <tr>
+{% for name in ["Name", "Edit", "Delete", ] %}
+                    <th>{{ name }}</th>
+{% endfor %}
+                    </tr>
+{% for row_item in data.departments %}
+                    <tr>
+                        <td>
+                            <input class="department-textbox" id="department_textbox_{{ row_item.id }}" name="new_department"  type="text" value="{{ row_item.name }}">
+                            <span id="department_text_{{ row_item.id }}">{{ row_item.name }}</span>
+                        </td>
+                        <td>
+                            <input class="btn btn-outline-dark btn-func-edit" id="edit_{{ row_item.id }}" name="edit_{{ row_item.id }}" type="button" value="Edit">
+                            <input class="btn btn-outline-dark btn-func-apply" id="apply_{{ row_item.id }}" name="apply_{{ row_item.id }}" type="button" value="Apply">
+                        </td>
+                        <td>
+                            <input class="btn btn-outline-dark btn-func-delete" id="delete_{{ row_item.id }}" name="delete_{{ row_item.id }}" type="button" value="Delete">
+                        </td>
+                    </tr>
+{% endfor %}
+                    
+                </table>
+            </div>
+            <div class="add-new-department">
+                <input class="new-department" id="new_department" name="new_department" placeholder="New department" type="text" value="">
+                <input class="btn btn-outline-dark" id="add_button" name="add_button" type="button" value="Add">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/departments.js') }}"></script>
+{% endblock %}

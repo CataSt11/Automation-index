@@ -1,0 +1,11 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+The following automation-tools are available:
+<ul>
+{% for item in data["automation-tools"] %}
+<li> {{ item }} </li>
+{% endfor %}
+</ul>
+{% endblock %}

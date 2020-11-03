@@ -1,0 +1,114 @@
+{% extends "base.j2" %}
+
+{% block content %}
+
+<h2 class="workflows-data-table">The following workflows are available:</h2>
+
+<div class= "workflows-main-container" id="workflows_main_container">
+{% for workflow in data["workflows"].items() %}
+    <div class="workflows-workflow-container" id="workflows_workflow_container-{{ workflow[0] }}">
+        <div class="workflows-workflow-title" id="workflows_workflow_title-{{ workflow[0] }}" style="">
+        <form name="form1">
+            <span class="workflows-workflow" id="workflows_workflow_text-{{ workflow[0] }}"> {{ workflow[1].workflow_name }} </span>
+                <input class="workflows-workflow-textbox" id="workflows_workflow_textbox-{{ workflow[0] }}" type="text" size="50" value="{{ workflow[1].workflow_name }}" style="display: none">
+                <input class="btn btn-outline-dark workflows-btn-func-workflow-edit" id="workflows_btn_func_workflow_edit-{{ workflow[0] }}" name="workflows_btn_func_workflow_edit-{{ workflow[0] }}" type="button" value="Edit">
+                <input class="btn btn-outline-dark workflows-btn-func-workflow-apply" id="workflows_btn_func_workflow_apply-{{ workflow[0] }}" name="workflows_btn_func_workflow_apply-{{ workflow[0] }}" type="button" value="Apply" style="display: none">
+                <input class="btn btn-outline-dark workflows-btn-func-workflow-delete" id="workflows_btn_func_workflow_delete-{{ workflow[0] }}" name="workflows_btn_func_workflow_delete-{{ workflow[0] }}" type="button" value="Delete">
+        </form>
+        </div>
+
+        <div class="workflows-group-wt" id="workflows_group_wt-{{ workflow[0] }}"; style="display: none;">
+            
+            <span class="workflow-tasks-tab" id="workflow_tasks_tab-{{ workflow[0] }}" style="background-color: #AED1D5; color: white; cursor: pointer">Tasks</span>
+            &nbsp;
+            <span class="workflow-departments-tab" id="workflow_departments_tab-{{ workflow[0] }}" style="cursor: pointer">Departments</span>
+            
+
+            <div class="workflows-tasks-container" id="workflows_tasks_container-{{ workflow[0] }}">
+                
+{% for task in workflow[1].tasks.items() %}
+                        <div class="workflows-workflow-group-task-elements" id="workflows_workflow{{ workflow[0] }}_group_task_elements_container-{{ task[0] }}">
+                            <input type="radio" class="workflows-radio-btn workflows-radio-order--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_radio_btn_task-{{ task[0] }}" name="workflows_radio_btn-{{ workflow[0] }}" value="{{ task[0] }}" style="display: none">
+                            <span class="workflows-radio-order workflows-radio-order--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_radio_order-{{ task[0] }}" style=" display: none">{{ task[1].order_number }}</span>
+                            <input type="text" class="workflows-task-name-textbox workflows-group-task-name-textbox--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_tasks_textbox-{{ task[0] }}" size=50 value="{{ task[1].name }}" style="display: none">
+                            <span class="workflows-group-task-name-text--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_tasks_text-{{ task[0] }}">{{ task[1].name }}</span>
+                            <input type="text" class="workflows-task-name-textbox workflows-group-timecomp-textbox--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_tasks_timecomp_textbox-{{ task[0] }}" size=3 value="{{ task[1].time_of_completion }}" style="display: none">
+                            <span class="workflows-group-timecomp-text--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_tasks_timecomp_text-{{ task[0] }}">({{ task[1].time_of_completion }} s)</span>
+{% set automation_tool_text = {"title":"Manual", "value":"(M)"} %}
+{% if task[1].automation_tool_id is not none %}
+{% set automation_tool_text = {"title":task[1].automation_tool_name, "value":"(A)"} %}
+{% endif %}
+                            <span class="workflows-group-task-automation-tool-text--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_tasks_automation_tool_text-{{ task[0] }}" title="{{ automation_tool_text.title }}">{{ automation_tool_text.value }}</span>
+                            <select class="workflows-group-task-automation-tool-select--{{ workflow[0] }}" name="workflows_select_automation_tool" id="workflows_workflow{{ workflow[0] }}_select_automation_tool-{{ task[0] }}" style="display: none">
+                                <option value="" disabled selected>Select an automation tool</option>
+                                <option value="">Manual</option>
+{% for automation_tool in data.automation_tools %}
+{% set automation_tool_selected = "" %}
+{% if automation_tool.id == task[1].automation_tool_id %}
+{% set automation_tool_selected = "selected" %}
+{% endif %}
+                                <option value="{{ automation_tool.id }}"{{ automation_tool_selected }}>{{ automation_tool.name }}</option>
+{% endfor %}
+                            </select>
+                            <input class="btn btn-outline-dark workflows-remove-task workflows-group-remove-task--{{ workflow[0] }}" id="workflows_workflow{{ workflow[0] }}_remove-{{ task[0] }}" type="button" value="Remove" style="display: none">
+                        </div>
+{% endfor %}
+                <img src="static/images/up-disabled.gif" alt="Up arrow" class="up-btn change-order-buttons workflows-change-order-buttons--{{ workflow[0] }}" id="workflows_up_btn-{{ workflow[0] }}" style="padding-bottom: 5px; display: none; cursor: auto"></img>
+                <br>
+                <img src="static/images/down-disabled.gif" alt="Down arrow" class="down-btn change-order-buttons workflows-change-order-buttons--{{ workflow[0] }}" id="workflows_down_btn-{{ workflow[0] }}" style="padding-up: 5px; display: none; cursor: auto"></img>
+                <br>
+                <input type="button" value="Edit tasks" class="btn btn-outline-dark workflows-tasks-edit workflows-group-tasks-edit--{{ workflow[0] }}" id="workflows_tasks_edit-{{ workflow[0] }}">
+                <input type="button" value="Edit tasks' details" class="btn btn-outline-dark workflows-tasks-details-edit workflows-group-tasks-details-edit--{{ workflow[0] }}" id="workflows_tasks_details_edit-{{ workflow[0] }}" style="display: none">
+                <input type="button" value="Apply changes" class="btn btn-outline-dark workflows-tasks-apply workflows-group-tasks-apply--{{ workflow[0] }}" id="workflows_tasks_apply-{{ workflow[0] }}" style="display: none">
+                <br>
+                <input type="text" class="workflows-tasks-add-text workflows-group-tasks-add-text--{{ workflow[0] }}" id="workflows_tasks_add_text-{{ workflow[0] }}" placeholder="Enter new task name" name="workflows_task_add" style="display: none">
+                <input type="button" value="Add" class="btn btn-outline-dark workflows-tasks-add-button workflows-group-tasks-add--{{ workflow[0] }}" id="workflows_tasks_add_button-{{ workflow[0] }}" name="workflows_task_add" style="display: none">
+                <br>
+                <input type="button" value="Cancel changes" class="btn btn-outline-dark workflows-tasks-cancel-changes workflows-group-tasks-cancel-changes--{{ workflow[0] }}" id="workflows_tasks_cancel_changes-{{ workflow[0] }}" name="workflows_task_cancel_changes" style="display: none">
+            </div>
+
+            <div class="workflows-departments-container" id="workflows_departments_container-{{ workflow[0] }}">
+            <form name="form" method="post">
+{% for department in workflow[1].departments.items() %}
+                <p>
+                    {{ department[1] }}
+                    <input class="btn btn-outline-dark workflows-departments-remove workflows-departments-remove--{{ workflow[0] }} " id="workflows_workflow{{ workflow[0] }}_departments_remove-{{ department[0] }}" type="button" value="Remove" title="Disassociate this workflow from this department">
+                </p>
+{% endfor %}
+
+{# get a list of departments not assigned to this workflow #}
+{% set avail_depts = [] %}
+{% set workflow_depts = [] %}
+{% for x in workflow[1].departments.items() %}
+{% set y = workflow_depts.append(x[1]) %}
+{% endfor %}
+{% for x in data["departments"] %}
+{% if x.name not in workflow_depts %}
+{% set y = avail_depts.append(x) %}
+{% endif %}
+{% endfor %}
+
+                <label for="workflows_select_new_department">Associate this workflow to other departments:</label>
+                <select name="workflows_select_new_department" id="workflows_select_new_department-{{ workflow[0] }}">
+                <option value="" disabled selected>Select a department</option>
+{% for department in avail_depts %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+{% endfor %}
+                </select>
+
+                <br>
+                <br>
+                <input type="button" class="btn btn-outline-dark workflows-departments-assign" id="workflows_departments_assign-{{ workflow[0] }}" name="" value="Assign">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+<form name="">
+    <input class="workflows-new-workflow" id="workflows_new_workflow" name="workflows_new_workflow" placeholder="New workflow" type="text" value="">
+    <input class="btn btn-outline-dark" id="workflows_add_workflow_button" name="workflows_add_workflow_button" type="button" value="Add">
+</form>
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/workflows.js') }}"></script>
+{% endblock %}

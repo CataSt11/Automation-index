@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" type="text/css" />
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/jquery-3.5.1.js') }}"></script>
+        {% if title %}
+        <title>{{ title }} - Automation Index</title>
+        {% else %}
+        <title>Automation Index</title>
+        {% endif %}
+    </head>
+    <body>
+    <header>
+        <div class="row no-gutters black-ribbon"></div>
+        <div class="header">
+            <a class="home-link" href="{{ url_for('index') }}">
+                <img class="logo-img" src="/static/images/logo.png" alt="Logo">
+            </a>
+            <a class="home-link" href="{{ url_for('index') }}">
+                <h1 class="name">Automation Index</h1>
+            </a>
+    
+        </div>
+    </header>
+
+    <div class="menu">
+{% for item in [
+    {"route":"index", "a_name":"Home"},
+    {"route":"departments", "a_name":"Departments"},
+    {"route":"workflows", "a_name":"Workflows"},
+    {"route":"automation_tools", "a_name":"Automation Tools"},
+    {"route":"reports", "a_name":"Reports"},
+    ] %}
+
+{% if request.endpoint == item.route %}
+    <a class="active-menu-item" href="{{ url_for(item.route) }}">{{ item.a_name }}</a>
+{% else %}
+    <a class="inactive-menu-item" href="{{ url_for(item.route) }}">{{ item.a_name }}</a>
+{% endif %}
+    &nbsp;
+{% endfor %}
+     </div>
+    <div class="row no-gutters blue-ribbon"></div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+        
+    <img class="leaf-picture" src="/static/images/leaf.jpg" alt="Leaf_Pic">
+    <footer>
+        <div class="row no-gutters black-ribbon">
+            <p class="contact">Contact:<a class="contact-link" href="mailto:admin@automation.com"> admin@automation.com</a></p>
+        </div>
+    </footer>
+
+    </body>
+</html>
