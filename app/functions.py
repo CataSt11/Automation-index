@@ -6,7 +6,7 @@ class init_mysql:
         # initialize mysql connector
         try:
             self.conn = mysql.connector.connect(
-                host="127.0.0.1",
+                host="0.0.0.0",
                 user="root",
                 passwd="",
                 database="automationdb",
